@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name">Exercise01</string>
+  <string name="btn_login">Login</string>
+  <string name="et_user">User</string>
+  <string name="et_password">Password</string>
+</resources>
