@@ -20,13 +20,13 @@ namespace Exercise01.Adapters
         public TweetsAdapter(List<Tweet> tweetsOrImages)
         {
             tweets = tweetsOrImages;
-            this.isImage = false;
+            isImage = false;
         }
 
         public TweetsAdapter(List<string> tweetsOrImages)
         {
             images = tweetsOrImages;
-            this.isImage = true;
+            isImage = true;
         }
 
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
