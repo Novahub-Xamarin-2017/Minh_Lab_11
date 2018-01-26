@@ -259,7 +259,7 @@ namespace Exercise02
 			public const int app_name = 2131165184;
 			
 			// aapt resource value: 0x7f070001
-			public const int tv_email = 2131165185;
+			public const int email = 2131165185;
 			
 			static String()
 			{

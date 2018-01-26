@@ -2,5 +2,5 @@
 <resources>
   <string name="app_name">Exercise02</string>
 
-  <string name="tv_email">Email: </string>
+  <string name="email">Email: </string>
 </resources>

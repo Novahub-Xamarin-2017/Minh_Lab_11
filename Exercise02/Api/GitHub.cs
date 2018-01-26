@@ -28,17 +28,7 @@ namespace Exercise02.Api
         public List<User> GetUsers(string username)
         {
             request.Headers["User-Agent"] = "mytest";
-
-            var response = "";
-
-            try
-            {
-                response = request.DownloadString($"{root}/search/users?q={username}");
-            }
-            catch (WebException e)
-            {
-                throw;
-            }
+            var response = request.DownloadString($"{root}/search/users?q={username}");
 
             var users = JsonConvert.DeserializeObject<ListOfUser>(response);
 
@@ -52,34 +42,16 @@ namespace Exercise02.Api
 
         public Detail GetDetail(string url)
         {
-            var response = "";
-
-            try
-            {
-                request.Headers["User-Agent"] = "mytest";
-                response = request.DownloadString(url);
-            }
-            catch (WebException e)
-            {
-                throw;
-            }
+            request.Headers["User-Agent"] = "mytest";
+            var response = request.DownloadString(url);
 
             return JsonConvert.DeserializeObject<Detail>(response);
         }
 
         public List<string> GetRepositories(string url)
         {
-            var response = "";
-
-            try
-            {
-                request.Headers["User-Agent"] = "mytest";
-                response = request.DownloadString(url);
-            }
-            catch (WebException e)
-            {
-                throw;
-            }
+            request.Headers["User-Agent"] = "mytest";
+            var response = request.DownloadString(url);
 
             return JsonConvert.DeserializeObject<List<Repository>>(response).Select(x => x.Name).ToList();
         }

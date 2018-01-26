@@ -56,7 +56,7 @@ namespace Exercise02.Adapters
 
         private TextView textViewEmail;
 
-        private string repositoryUrl;
+        private string url;
 
         private Detail detail;
 
@@ -67,7 +67,7 @@ namespace Exercise02.Adapters
                 textViewName.Text = value.Login;
                 textViewEmail.Text = value.Detail.Email?.ToString() ?? "";
                 detail = value.Detail;
-                repositoryUrl = value.ReposUrl;
+                url = value.Url;
                 Picasso.With(ItemView.Context).Load(value.AvatarUrl).Resize(50, 50).Into(imageViewAvatar);
             }
         }
@@ -81,7 +81,7 @@ namespace Exercise02.Adapters
             itemView.Click += (sender, e) => clickListener(new UserAdapterClickEventArgs
             {
                 View = itemView,
-                RepositoryUrl = repositoryUrl,
+                Url = url,
                 Detail = detail
             });
         }
@@ -91,7 +91,7 @@ namespace Exercise02.Adapters
     {
         public View View { get; set; }
 
-        public string RepositoryUrl { get; set; }
+        public string Url { get; set; }
 
         public Detail Detail { get; set; }
     }

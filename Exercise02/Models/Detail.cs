@@ -15,8 +15,6 @@ namespace Exercise02.Models
 {
     public class Detail
     {
-        public static Detail DetailCurrent = new Detail();
-
         [JsonProperty("name")]
         public string Name { get; set; }
 
@@ -30,6 +28,9 @@ namespace Exercise02.Models
         public string Location { get; set; }
 
         [JsonProperty("email")]
-        public object Email { get; set; }
+        public string Email { get; set; }
+
+        [JsonProperty("repos_url")]
+        public string ReposUrl { get; set; }
     }
 }
