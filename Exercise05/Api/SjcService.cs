@@ -22,21 +22,11 @@ namespace Exercise05.Api
 
         private string root = "http://www.sjc.com.vn/xml/tygiavang.xml";
 
-        private List<City> cities;
+        public List<City> Cities { get; private set; }
 
-        public List<City> Cities
-        {
-            get => cities;
-        }
+        public List<string> TextViewValues { get; private set; }
 
-        private List<string> strings;
-
-        public List<string> Strings
-        {
-            get => strings;
-        }
-
-        public void ReloadSjcGoldPrice()
+        public void LoadGoldData()
         {
             var request = new WebClient();
 
@@ -46,16 +36,16 @@ namespace Exercise05.Api
             {
                 var sjcGoldPrice = (SjcGoldPrice)(new XmlSerializer(typeof(SjcGoldPrice))).Deserialize(stringReader);
 
-                sjcGoldPrice.Ratelist.City.ForEach(x=>x.GoldPrice.ForEach(y=> 
+                sjcGoldPrice.Ratelist.Cities.ForEach(x=>x.GoldPrices.ForEach(y=> 
                 {
                     y.Buy = "Buy: " + y.Buy;
                     y.Sell = "Sell: " + y.Sell;
                     y.Type = "Type: " + y.Type;
                 }));
 
-                cities = sjcGoldPrice.Ratelist.City;
+                Cities = sjcGoldPrice.Ratelist.Cities;
 
-                strings = new List<string>()
+                TextViewValues = new List<string>()
                 {
                     sjcGoldPrice.Title,
                     "Source: " + sjcGoldPrice.Url,

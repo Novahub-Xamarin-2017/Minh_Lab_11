@@ -57,7 +57,7 @@ namespace Exercise05.Adapters
             set
             {
                 textViewCityName.Text = value.Name;
-                adapter.GoldPrices = value.GoldPrice;
+                adapter.GoldPrices = value.GoldPrices;
             }
         }
 

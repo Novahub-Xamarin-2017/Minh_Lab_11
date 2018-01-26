@@ -30,7 +30,7 @@ namespace Exercise05.Models
     public class City
     {
         [XmlElement(ElementName = "item")]
-        public List<GoldPrice> GoldPrice { get; set; }
+        public List<GoldPrice> GoldPrices { get; set; }
 
         [XmlAttribute(AttributeName = "name")]
         public string Name { get; set; }
@@ -40,7 +40,7 @@ namespace Exercise05.Models
     public class Ratelist
     {
         [XmlElement(ElementName = "city")]
-        public List<City> City { get; set; }
+        public List<City> Cities { get; set; }
 
         [XmlAttribute(AttributeName = "updated")]
         public string Updated { get; set; }
