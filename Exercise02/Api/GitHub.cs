@@ -28,6 +28,7 @@ namespace Exercise02.Api
         public List<User> GetUsers(string username)
         {
             request.Headers["User-Agent"] = "mytest";
+            request.Headers["Authorization"] = "Bearer 66b6a8627d738da639f7b959008ffe2724d82327";
             var response = request.DownloadString($"{root}/search/users?q={username}");
 
             var users = JsonConvert.DeserializeObject<ListOfUser>(response);
@@ -43,6 +44,7 @@ namespace Exercise02.Api
         public Detail GetDetail(string url)
         {
             request.Headers["User-Agent"] = "mytest";
+            request.Headers["Authorization"] = "Bearer 66b6a8627d738da639f7b959008ffe2724d82327";
             var response = request.DownloadString(url);
 
             return JsonConvert.DeserializeObject<Detail>(response);
@@ -51,6 +53,7 @@ namespace Exercise02.Api
         public List<string> GetRepositories(string url)
         {
             request.Headers["User-Agent"] = "mytest";
+            request.Headers["Authorization"] = "Bearer 66b6a8627d738da639f7b959008ffe2724d82327";
             var response = request.DownloadString(url);
 
             return JsonConvert.DeserializeObject<List<Repository>>(response).Select(x => x.Name).ToList();

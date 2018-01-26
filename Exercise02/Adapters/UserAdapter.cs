@@ -65,7 +65,7 @@ namespace Exercise02.Adapters
             set
             {
                 textViewName.Text = value.Login;
-                textViewEmail.Text = value.Detail.Email?.ToString() ?? "";
+                textViewEmail.Text = value.Detail.Email;
                 detail = value.Detail;
                 url = value.Url;
                 Picasso.With(ItemView.Context).Load(value.AvatarUrl).Resize(50, 50).Into(imageViewAvatar);

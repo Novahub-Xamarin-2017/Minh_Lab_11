@@ -46,7 +46,7 @@ namespace Exercise02
                 {
                     "Blog: " + value.Blog,
                     "Company: " + value.Company,
-                    "Email: " + value.Email,//?.ToString() ?? "",
+                    "Email: " + value.Email,
                     "Location: " + value.Location,
                     "Name: " + value.Name
                 };
