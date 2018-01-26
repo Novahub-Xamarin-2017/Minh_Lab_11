@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <dimen name="margin_small">4dp</dimen>
+  <dimen name="margin_medium">10dp</dimen>
+  <dimen name="margin_large">15dp</dimen>
+
+  <dimen name="padding_medium">9dp</dimen>
+
+  <dimen name="radius_card">9dp</dimen>
+  <dimen name="elevation_card">4dp</dimen>
+
+  <dimen name="hight_icon">50dp</dimen>
+  <dimen name="width_icon">50dp</dimen>
+</resources>
