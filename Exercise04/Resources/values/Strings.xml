@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name">Exercise04</string>
+
+  <string name="cityname">City Name: </string>
+  <string name="cloud">Cloud: </string>
+  <string name="temperature">Temperature: </string>
+  <string name="weather">Weather: </string>
+  <string name="wind">Wind: </string>
+</resources>
