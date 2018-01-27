@@ -69,9 +69,15 @@ namespace Exercise02
             }.Select(x => FindViewById<TextView>(x)).ToList();
 
             var url = Intent.GetStringExtra("url");
-            Detail = GitHub.gitHub.GetDetail(url);
 
-            var adapter = new ArrayAdapter<string>(this, Resource.Layout.Repository, GitHub.gitHub.GetRepositories(reposUrl));
+            var adapter = new ArrayAdapter<string>(this, Resource.Layout.Repository);
+
+            if (GitHub.gitHub.CheckForInternetConnection(this))
+            {
+                Detail = GitHub.gitHub.GetDetail(url);
+                adapter.AddAll(GitHub.gitHub.GetRepositories(reposUrl));
+            }
+
             FindViewById<ListView>(Resource.Id.lv_repository).Adapter = adapter;
         }
     }

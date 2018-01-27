@@ -14,6 +14,7 @@ using Exercise02.Models;
 using System.Threading.Tasks;
 using System.Net;
 using Newtonsoft.Json;
+using System.Net.NetworkInformation;
 
 namespace Exercise02.Api
 {
@@ -25,10 +26,37 @@ namespace Exercise02.Api
 
         private WebClient request = new WebClient();
 
-        public List<User> GetUsers(string username)
+        private void SetHeader()
         {
             request.Headers["User-Agent"] = "mytest";
-            request.Headers["Authorization"] = "Bearer 66b6a8627d738da639f7b959008ffe2724d82327";
+        }
+
+        public bool CheckForInternetConnection(Context context)
+        {
+            try
+            {
+                SetHeader();
+                request.DownloadString(root);
+            }
+            catch(WebException e)
+            {
+                if (e.Status == WebExceptionStatus.NameResolutionFailure || e.Status == WebExceptionStatus.ReceiveFailure) 
+                {
+                    Toast.MakeText(context, "No Internet Access", ToastLength.Short).Show();
+
+                    return false;
+                } else
+                {
+                    throw;
+                }
+            }
+
+            return true;
+        }
+
+        public List<User> GetUsers(string username)
+        {
+            SetHeader();
             var response = request.DownloadString($"{root}/search/users?q={username}");
 
             var users = JsonConvert.DeserializeObject<ListOfUser>(response);
@@ -43,8 +71,7 @@ namespace Exercise02.Api
 
         public Detail GetDetail(string url)
         {
-            request.Headers["User-Agent"] = "mytest";
-            request.Headers["Authorization"] = "Bearer 66b6a8627d738da639f7b959008ffe2724d82327";
+            SetHeader();
             var response = request.DownloadString(url);
 
             return JsonConvert.DeserializeObject<Detail>(response);
@@ -52,8 +79,7 @@ namespace Exercise02.Api
 
         public List<string> GetRepositories(string url)
         {
-            request.Headers["User-Agent"] = "mytest";
-            request.Headers["Authorization"] = "Bearer 66b6a8627d738da639f7b959008ffe2724d82327";
+            SetHeader();
             var response = request.DownloadString(url);
 
             return JsonConvert.DeserializeObject<List<Repository>>(response).Select(x => x.Name).ToList();

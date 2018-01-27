@@ -28,7 +28,10 @@ namespace Exercise02
             var searchView = FindViewById<SearchView>(Resource.Id.sv_user);
             searchView.QueryTextSubmit += delegate
             {
-                adapter.Users = GitHub.gitHub.GetUsers(searchView.Query);
+                if (GitHub.gitHub.CheckForInternetConnection(this))
+                {
+                    adapter.Users = GitHub.gitHub.GetUsers(searchView.Query);
+                }
             };
 
             adapter.ItemClick += (object sender, UserAdapterClickEventArgs e) =>
