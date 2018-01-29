@@ -18,9 +18,11 @@ using System.Net.NetworkInformation;
 
 namespace Exercise02.Api
 {
-    class GitHub
+    public class GitHub
     {
-        public static GitHub gitHub = new GitHub();
+        private static GitHub instance;
+
+        public static GitHub Instance => instance ?? (instance = new GitHub());
 
         private string root = "https://api.github.com";
 
@@ -29,29 +31,6 @@ namespace Exercise02.Api
         private void SetHeader()
         {
             request.Headers["User-Agent"] = "mytest";
-        }
-
-        public bool CheckForInternetConnection(Context context)
-        {
-            try
-            {
-                SetHeader();
-                request.DownloadString(root);
-            }
-            catch(WebException e)
-            {
-                if (e.Status == WebExceptionStatus.NameResolutionFailure || e.Status == WebExceptionStatus.ReceiveFailure) 
-                {
-                    Toast.MakeText(context, "No Internet Access", ToastLength.Short).Show();
-
-                    return false;
-                } else
-                {
-                    throw;
-                }
-            }
-
-            return true;
         }
 
         public List<User> GetUsers(string username)

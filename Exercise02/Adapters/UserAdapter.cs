@@ -9,9 +9,9 @@ using Square.Picasso;
 
 namespace Exercise02.Adapters
 {
-    class UserAdapter : RecyclerView.Adapter
+    public class UserAdapter : RecyclerView.Adapter
     {
-        public event EventHandler<UserAdapterClickEventArgs> ItemClick;
+        public event EventHandler ItemClick;
 
         private List<User> users;
 
@@ -22,6 +22,8 @@ namespace Exercise02.Adapters
                 users = value;
                 NotifyDataSetChanged();
             }
+
+            get => users;
         }
 
         public UserAdapter(List<User> users)
@@ -35,7 +37,11 @@ namespace Exercise02.Adapters
             var itemView = LayoutInflater.From(parent.Context).
                    Inflate(id, parent, false);
 
-            return new UserAdapterViewHolder(itemView, OnClick);
+            var userAdapterViewHolder = new UserAdapterViewHolder(itemView);
+
+            userAdapterViewHolder.ClickHandler += ItemClick;
+
+            return userAdapterViewHolder;
         }
 
         public override void OnBindViewHolder(RecyclerView.ViewHolder viewHolder, int position)
@@ -44,55 +50,5 @@ namespace Exercise02.Adapters
         }
 
         public override int ItemCount => users.Count;
-
-        void OnClick(UserAdapterClickEventArgs args) => ItemClick?.Invoke(this, args);
-    }
-
-    public class UserAdapterViewHolder : RecyclerView.ViewHolder
-    {
-        private TextView textViewName;
-
-        private ImageView imageViewAvatar;
-
-        private TextView textViewEmail;
-
-        private string url;
-
-        private Detail detail;
-
-        public User User
-        {
-            set
-            {
-                textViewName.Text = value.Login;
-                textViewEmail.Text = value.Detail.Email;
-                detail = value.Detail;
-                url = value.Url;
-                Picasso.With(ItemView.Context).Load(value.AvatarUrl).Resize(50, 50).Into(imageViewAvatar);
-            }
-        }
-
-        public UserAdapterViewHolder(View itemView, Action<UserAdapterClickEventArgs> clickListener) : base(itemView)
-        {
-            textViewName = itemView.FindViewById<TextView>(Resource.Id.tv_user);
-            textViewEmail = itemView.FindViewById<TextView>(Resource.Id.tv_email);
-            imageViewAvatar = itemView.FindViewById<ImageView>(Resource.Id.iv_avatar);
-
-            itemView.Click += (sender, e) => clickListener(new UserAdapterClickEventArgs
-            {
-                View = itemView,
-                Url = url,
-                Detail = detail
-            });
-        }
-    }
-
-    public class UserAdapterClickEventArgs : EventArgs
-    {
-        public View View { get; set; }
-
-        public string Url { get; set; }
-
-        public Detail Detail { get; set; }
     }
 }

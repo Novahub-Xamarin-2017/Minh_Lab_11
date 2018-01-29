@@ -13,12 +13,6 @@ using Newtonsoft.Json;
 
 namespace Exercise02.Models
 {
-    public class ListOfUser
-    {
-        [JsonProperty("items")]
-        public List<User> Users { get; set; }
-    }
-
     public class User
     {
         [JsonProperty("login")]

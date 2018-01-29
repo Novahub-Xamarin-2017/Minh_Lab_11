@@ -12,6 +12,8 @@ using Android.Widget;
 using Android.Support.V7.Widget;
 using Exercise02.Api;
 using Exercise02.Models;
+using System.Net;
+using Android.Util;
 
 namespace Exercise02
 {
@@ -72,10 +74,14 @@ namespace Exercise02
 
             var adapter = new ArrayAdapter<string>(this, Resource.Layout.Repository);
 
-            if (GitHub.gitHub.CheckForInternetConnection(this))
+            try
             {
-                Detail = GitHub.gitHub.GetDetail(url);
-                adapter.AddAll(GitHub.gitHub.GetRepositories(reposUrl));
+                Detail = GitHub.Instance.GetDetail(url);
+                adapter.AddAll(GitHub.Instance.GetRepositories(reposUrl));
+            }
+            catch (WebException e)
+            {
+                Log.Debug("ApiError", $"Exception: {e.Message}");
             }
 
             FindViewById<ListView>(Resource.Id.lv_repository).Adapter = adapter;
