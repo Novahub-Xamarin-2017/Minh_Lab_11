@@ -14,6 +14,6 @@ public class ReadAsset : Activity
 	}
 }
 
-Additionally, some Android functions will automatically load asset files:
+Additionally, some Android functions will automatically load asset files:ss
 
 Typeface tf = Typeface.CreateFromAsset (Context.Assets, "fonts/samplefont.ttf");
